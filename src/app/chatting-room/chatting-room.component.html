@@ -1,0 +1,20 @@
+<div>
+  <h1>Chat Rooms</h1>
+  <div *ngFor="let message of messageSnapshot | async">
+    <div (click)="getRoom(message.key)">
+      <h3> {{ message | json }} </h3>
+    </div>
+  </div>
+
+  <div *ngIf="room$ | async as room">
+    <!-- {{room | json}} -->
+    Entered room...
+    <li *ngFor="let text of room">
+      {{text.text}} ({{text.user}})
+    </li>
+    <form>
+      <input type="text" #textInput>
+    </form>
+    <a class="btn btn-info" (click)="addMessage(textInput.value)">Send</a>
+  </div>
+</div>
